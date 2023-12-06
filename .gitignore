@@ -163,5 +163,3 @@ cython_debug/
 CAroot.crt
 FusionEngine/
 IM/
-rasaDemo/.rasa/cache
-rasaDemo/models
