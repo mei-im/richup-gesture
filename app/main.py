@@ -16,6 +16,8 @@ intent_before = ""
 list_intent = ["insert_name", "create_room", "choose_color", "information_house", "start_game", "roll_dice", "end_turn", "buy_house", "leave_prison", "give_up_game", "confirm", "deny", "close_game",
                "list_of_colors", "game_info", "help", "mute", "unmute"]
 
+list_gesture = ["HANDRIGHTUPHELP", "HANDSUPGIVEUP"]
+
 GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
             Cada jogador começa com dinheiro e escolhe uma cor para representá-lo no tabuleiro. 
             O objetivo é adquirir propriedades, construir casas e hotéis, e cobrar aluguer dos adversários.
@@ -24,13 +26,10 @@ GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que comb
             Boa sorte!"""
 
 
-async def message_handler(game: Game, message:str):
+async def voice_handler(game: Game, message:str):
     global intent_before
-    message = process_message(message)
-    # print(f"Message received: {message}")
-    if message == "OK":
-        return "OK"
-    elif message["intent"]["name"] in list_intent:
+    print(f"Speak voice received: {message}")
+    if message["intent"]["name"] in list_intent:
         print(f"Message received/ intent: {message['intent']['name']}")
         intent = message["intent"]["name"]
         if message["intent"]["confidence"] < 0.7:
@@ -129,16 +128,51 @@ async def message_handler(game: Game, message:str):
         game.tts(random_not_understand())
         print(f"Command not found: {message}")
 
+async def gesture_handler(game: Game, gesture:str):
+    print(f"Gesture received: {gesture}")
+    name_of_gesture = gesture["recognized"][1]
+    confidence = gesture["confidence"].replace(",", ".")
+    if float(confidence) < 0.7:
+        game.tts(random_not_understand())
+    elif name_of_gesture in list_gesture:
+        if name_of_gesture == "HANDRIGHTUPHELP":
+            game.tts("Para obter ajuda, diga ajuda")
+    else:
+        game.tts(random_not_understand_the_gesture())
+        print(f"Command not found: {gesture}")
+
+
+async def message_handler(game: Game, message:str):
+    message, status = process_message(message)
+    if message == "OK" and status == None:
+        return "OK"
+    elif status == "voice":
+        await voice_handler(game=game, message=message)
+    elif status == "gesture":
+        await gesture_handler(game=game, gesture=message)
+    else:
+        return "OK"
+
+
+
 
 def process_message(message):
     if message == "OK":
-        return "OK"
+        return "OK", None
     else:
         json_command = ET.fromstring(message).find(".//command").text
-        command = json.loads(json_command)["nlu"]
-        command = json.loads(command)
-        print(f"Command received: {command['text']}")
-        return command
+        print(f"Json command: {json_command}")
+        # json_command contains the recognized command
+        if "recognized" in json_command:
+            gesture = json.loads(json_command)
+            return gesture, "gesture"
+        elif "nlu" in json_command:
+            command = json.loads(json_command)["nlu"]
+            command = json.loads(command)
+            print(f"Command received: {command['text']}")
+            return command, "voice"
+        else:
+            return "OK", None
     
 async def main():
     tts = TTS(FusionAdd=f"https://{HOST}:8000/IM/USER1/APPSPEECH").sendToVoice
@@ -151,7 +185,6 @@ async def main():
     ssl_context.verify_mode = ssl.CERT_NONE
 
     # Connect to websocket
-    
     
     async with websockets.connect(mmi_cli_out_add, ssl=ssl_context) as websocket:
         print("Connected to MMI CLI OUT")

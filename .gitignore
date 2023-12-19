@@ -163,3 +163,6 @@ cython_debug/
 CAroot.crt
 FusionEngine/
 IM/
+GenericGesturesModality-2023/
+gestures_kine/
+WebAppAssistantV2/

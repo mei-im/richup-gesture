@@ -2,37 +2,17 @@
 <Gestures>
   <Gesture>
     <ID>0</ID>
-    <NAME>Push</NAME>
-    <SEMANTIC>Push</SEMANTIC>
+    <NAME>hand_right_up_help</NAME>
+    <SEMANTIC>handrightuphelp</SEMANTIC>
   </Gesture>
   <Gesture>
     <ID>1</ID>
-    <NAME>SwipeDown</NAME>
-    <SEMANTIC>SwipeD</SEMANTIC>
+    <NAME>hands_up_give_up</NAME>
+    <SEMANTIC>handsupgiveup</SEMANTIC>
   </Gesture>
   <Gesture>
     <ID>2</ID>
-    <NAME>SwipeLeft</NAME>
-    <SEMANTIC>SwipeL</SEMANTIC>
-  </Gesture>
-  <Gesture>
-    <ID>3</ID>
-    <NAME>SwipeRight</NAME>
-    <SEMANTIC>SwipeR</SEMANTIC>
-  </Gesture>
-  <Gesture>
-    <ID>4</ID>
-    <NAME>SwipeUp</NAME>
-    <SEMANTIC>SwipeU</SEMANTIC>
-  </Gesture>
-  <Gesture>
-    <ID>5</ID>
-    <NAME>ThumbDown</NAME>
-    <SEMANTIC>ThumbD</SEMANTIC>
-  </Gesture>
-  <Gesture>
-    <ID>6</ID>
-    <NAME>ThumbUp</NAME>
-    <SEMANTIC>ThumbU</SEMANTIC>
+    <NAME>throde_roll_dice</NAME>
+    <SEMANTIC>throderolldice</SEMANTIC>
   </Gesture>
 </Gestures>

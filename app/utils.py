@@ -231,3 +231,12 @@ def random_give_up_cancel():
             "Vamos continuar a jogar",
             "Ainda bem que não desististe, continua a jogar, e diverte-te",
     ]
+
+
+# Gestures
+@randomize
+def random_not_understand_the_gesture():
+    return [ "Não percebi o gesto que fizeste",
+            "Não percebi o gesto que fizeste, por favor repete",
+            "Não percebi o gesto que fizeste, podes repetir",
+    ]
