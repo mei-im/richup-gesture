@@ -251,4 +251,15 @@ class Game:
         time.sleep(3)
         self.tts("O jogo já não está silenciado")
 
-    
+    def help(self):
+        try:
+            self.button.help.click()
+            self.tts("De informação sobre o jogo")
+            time.sleep(10)
+            try:
+                self.button.close_help.click()
+                self.tts("A informação foi fechada")
+            except:
+                self.tts("Não é permitido, aceder à ajuda neste momento")
+        except:
+            self.tts("Não é permitido, aceder à ajuda neste momento")

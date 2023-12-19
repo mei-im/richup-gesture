@@ -1,5 +1,6 @@
 import json
 from os import system
+import time
 import xml.etree.ElementTree as ET
 import ssl
 import websockets
@@ -137,6 +138,9 @@ async def gesture_handler(game: Game, gesture:str):
     elif name_of_gesture in list_gesture:
         if name_of_gesture == "HANDRIGHTUPHELP":
             game.tts("Para obter ajuda, diga ajuda")
+            game.help()
+        elif name_of_gesture == "HANDSUPGIVEUP":
+            game.give_up_game()
     else:
         game.tts(random_not_understand_the_gesture())
         print(f"Command not found: {gesture}")

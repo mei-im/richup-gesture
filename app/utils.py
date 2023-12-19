@@ -240,3 +240,4 @@ def random_not_understand_the_gesture():
             "Não percebi o gesto que fizeste, por favor repete",
             "Não percebi o gesto que fizeste, podes repetir",
     ]
+            

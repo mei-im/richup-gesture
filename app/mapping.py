@@ -85,6 +85,14 @@ class Buttons(MapObject):
     def unmute(self):
         return self.find_element("/html/body/div[2]/div[4]/div/div[1]/div[1]/div/button[2]")   
     
+    @property
+    def help(self):
+        return self.find_element("/html/body/div[2]/div[4]/div/div[1]/div[1]/div/button[1]")
+    
+    @property
+    def close_help(self):
+        return self.find_element("/html/body/div[5]/div/div/button")
+    
 class Inputs(MapObject):
     @property
     def name(self):
