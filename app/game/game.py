@@ -239,8 +239,8 @@ class Game:
                         color_number = 12
                     elif color_number == 13:
                         color_number = 1
-
-                    self.tts(f"Estas com a cor {colors_in_pt[colors_map_values[color_number]]}")
+                    
+                    self.tts(random_frase_color(colors_in_pt[colors_map_values[color_number]]))
                     self.colors.__getattribute__(colors_map_values[color_number]).click()
                 else:   
                     self.tts("Não tem nenhuma cor disponível")
@@ -278,7 +278,7 @@ class Game:
                 self.tts("Não é permitido, aceder à ajuda neste momento")
         except:
             self.tts("Não é permitido, aceder à ajuda neste momento")
-            
+
     def give_up_game(self):
         if self.get_url() == "https://richup.io/":
             self.tts(random_create_room())

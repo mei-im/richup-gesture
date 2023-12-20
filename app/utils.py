@@ -240,4 +240,12 @@ def random_not_understand_the_gesture():
             "Não percebi o gesto que fizeste, por favor repete",
             "Não percebi o gesto que fizeste, podes repetir",
     ]
-            
+
+
+@randomize
+def random_frase_color(color):
+    return [f"A cor que escolheste foi a {color}",
+            f"A cor que ficaste foi a {color}",
+            f"A cor que estás é a {color}",
+            f"A cor selecionada foi a {color}",
+    ]    
