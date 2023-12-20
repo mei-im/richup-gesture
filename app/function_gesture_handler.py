@@ -19,9 +19,9 @@ async def gesture_handler(game: Game, gesture:str):
         elif name_of_gesture == "HANDSFRONTSELECT":
             game.join_game()
         elif name_of_gesture == "HANDLEFTSHOULDERLEVELDECREASE":
-            game.change_color_by_number(number=1)
+            game.change_color_number(number=1, increase=False)
         elif name_of_gesture == "HANDRIGHTSHOULDERLEVELINCREASE":
-            game.change_color_by_number(number=2)
+            game.change_color_number(number=1, increase=True)
     else:
         game.tts(random_not_understand_the_gesture())
         print(f"Command not found: {gesture}")

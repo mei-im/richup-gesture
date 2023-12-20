@@ -4,8 +4,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from utils import *
-from mapping import Buttons, Inputs, Houses, Colors
+from game.mapping import Buttons, Inputs, Houses, Colors
 from dictionaries.colors_dic import colors_in_pt, colors_map_values
+from selenium.webdriver.common.by import By
 
 
 class Game:
@@ -67,29 +68,13 @@ class Game:
                 color = self.colors.__getattribute__(color)
                 color.click()
                 self.tts(f"Ficaste com a cor {name_color}")
+                time.sleep(3)
                 self.join_game()
             else:
                 self.tts("Não é permitido escolheres a cor, neste momento")
                 
         except:
             self.tts("Não é permitido escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
-    
-    def join_game(self):
-        if self.get_url() == "https://richup.io/":
-            self.tts(random_create_room())
-            return
-        try:
-            if self.button.join_game_after_color.text.lower() == 'join game':
-                time.sleep(3)
-                self.tts("Espera que entre na sala")
-                time.sleep(3)
-                self.button.join_game_after_color.click()
-                time.sleep(3)
-                self.tts("Bem vindo ao sua sala")
-            else:
-                self.tts("Não é permitido entrar na sala, neste momento")
-        except:
-            self.tts("Não é permitido entrar na sala, enquanto não estás numa sala ou num jogo a decorrer")
 
     def roll_dice(self):
         if self.get_url() == "https://richup.io/":
@@ -238,30 +223,76 @@ class Game:
         time.sleep(3)
         self.tts("O jogo já não está silenciado")
 
-# Gestos commands
+    def list_house_information(self,house_name):
+
+        if self.get_url() == "https://richup.io/":
+            self.tts("Precisas de entrar numa sala para acessar ao tabuleiro do jogo")
+            return
+        
+        house = self.house.__getattribute__(house_name)
+        house.click()
+        self.tts(f"Já consegues ver a informação da propriedade {house_name}")
+        time.sleep(5)
+        house.click()
+        self.tts("A informação da propriedade foi minimizada")
+
+# Gests commands
     def help(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
         try:
             self.button.help.click()
-            self.tts("De informação sobre o jogo")
+            self.tts("A informação do Jogo foi aberta")
             time.sleep(10)
             try:
                 self.button.close_help.click()
-                self.tts("A informação foi fechada")
+                self.tts("A informação do Jogo foi fechada")
             except:
                 self.tts("Não é permitido, aceder à ajuda neste momento")
         except:
             self.tts("Não é permitido, aceder à ajuda neste momento")
 
-    def change_color_by_number(self, number):
+    def change_color_number(self, number:int, increase:bool):
         if self.get_url() == "https://richup.io/":
             self.tts(random_create_room())
             return
         try:
-            button, color_number = self.colors.change_color_by_number(number)
-            button.click()
-            self.tts(f"Ficaste com a cor {colors_in_pt[color_number]}")
+            print(self.button.join_game_after_color.text.lower())
+            if self.button.join_game_after_color.text.lower() == 'join game':
+                print("change color")
+                color_number_activate = self.get_color_activate()
+                if color_number_activate != 0:
+                    if increase:
+                        color_number = color_number_activate + number
+                    else:
+                        color_number = color_number_activate - number
+
+                    if color_number == 0:
+                        color_number = 12
+                    elif color_number == 13:
+                        color_number = 1
+
+                    self.tts(f"Escolheste a cor {colors_map_values[color_number]}" )
+                    self.colors.__getattribute__(colors_map_values[color_number]).click()
+                else:   
+                    self.tts("Não tem nenhuma cor disponível")
+            else:
+                self.tts("Não é permitido escolheres a cor, neste momento")
         except:
             self.tts("Não é permitido, mudar de cor neste momento")
+
+
+    def get_color_activate(self)->int:
+        color_number = 0
+        for i in range(1,13):
+            try:
+                button = self.browser.find_element(By.XPATH, f"/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
+            except:
+                button = self.browser.find_element(By.XPATH, f"/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
+            if not button.is_enabled():
+                return i
+        return color_number
         
 
 
@@ -277,15 +308,18 @@ class Game:
         except:
             self.tts(random_give_up_not_in_game())
 
-    def list_house_information(self,house_name):
-
+    def join_game(self):
         if self.get_url() == "https://richup.io/":
-            self.tts("Precisas de entrar numa sala para acessar ao tabuleiro do jogo")
+            self.tts(random_create_room())
             return
-        
-        house = self.house.__getattribute__(house_name)
-        house.click()
-        self.tts(f"Já consegues ver a informação da propriedade {house_name}")
-        time.sleep(5)
-        house.click()
-        self.tts("A informação da propriedade foi minimizada")
+        try:
+            if self.button.join_game_after_color.text.lower() == 'join game':
+                self.tts("Espera que entre na sala")
+                time.sleep(3)
+                self.button.join_game_after_color.click()
+                time.sleep(3)
+                self.tts("Bem vindo ao sua sala")
+            else:
+                self.tts("Não é permitido entrar na sala, neste momento")
+        except:
+            self.tts("Não é permitido entrar na sala, enquanto não estás numa sala ou num jogo a decorrer")

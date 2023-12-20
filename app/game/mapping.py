@@ -17,11 +17,14 @@ class Buttons(MapObject):
 
     @property
     def join_game(self):
-        return self.find_element('/html/body/div[1]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
 
     @property
     def join_game_after_color(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
+        try:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
+        except Exception:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
     
     @property
     def start_game(self):
@@ -91,7 +94,7 @@ class Buttons(MapObject):
     
     @property
     def close_help(self):
-        return self.find_element("/html/body/div[5]/div/div/button")
+        return self.find_element("/html/body/div[5]/div/div/button")        
     
 class Inputs(MapObject):
     @property
@@ -213,122 +216,55 @@ class Houses(MapObject):
         return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[9]/div[9]/div[3]/div[1]')
 
 class Colors(MapObject):
+    # TODO MUDAR CORES PARTE 2
+    # /html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button
+    # /html/body/div[7]/div/div[1]/div/div/div[1]/div/button[1]
+    # /html/body/div[7]/div/div[1]/div/div/div[1]/div/button[12]
 
     @property
     def lime(self):
-        try: 
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[1]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[1]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[1]')
     
     @property
     def yellow(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[2]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[2]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[2]')
     
     @property
     def orange(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[3]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[3]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[3]')
     
     @property
     def red(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[4]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[4]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[4]')
     
     @property
     def blue(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[5]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[5]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[5]')
     
     @property
     def cyan(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[6]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[6]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[6]')
     
     @property
     def water(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[7]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[7]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[7]')
     
     @property
     def green(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[8]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[8]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[8]')
     
     @property
     def brown(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[9]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[9]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[9]')
     
     @property
     def hotpink(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[10]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[10]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[10]')
     
     @property
     def pink(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[11]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[11]')
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[11]')
     
     @property
     def purple(self):
-        try:
-            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[12]')
-        except Exception:
-            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
-            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[12]')
-        
-    @property
-    def get_color_activate(self):
-        for i in range(1,13):
-            button = self.find_element(f"/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
-
-            if not button.is_enabled():
-                return i
-    
-
-    @property
-    def change_color_by_number(self, number):
-        color_number = 0 
-        for i in range(1,13):
-            button = self.find_element(f"/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
-
-            if not button.is_enabled():
-                color_number = i 
-                break
-        if color_number == 0:
-            return None
-        color_number = color_number + number
-        return self.find_element(f'/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{color_number}]'), color_number
+        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[12]')
