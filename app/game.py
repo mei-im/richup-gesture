@@ -28,7 +28,7 @@ class Game:
 
     def get_url(self):
         return self.browser.current_url
-    
+# Voice commands    
     def insert_name(self, name):
         try:
             if self.input.name.get_attribute("value") != "":
@@ -55,19 +55,6 @@ class Game:
                 self.tts(random_not_create_room())
         except:
             self.tts(random_not_create_room())
-
-    def list_house_information(self,house_name):
-
-        if self.get_url() == "https://richup.io/":
-            self.tts("Precisas de entrar numa sala para acessar ao tabuleiro do jogo")
-            return
-        
-        house = self.house.__getattribute__(house_name)
-        house.click()
-        self.tts(f"Já consegues ver a informação da propriedade {house_name}")
-        time.sleep(5)
-        house.click()
-        self.tts("A informação da propriedade foi minimizada")
 
     def choose_color(self, color):
         if self.get_url() == "https://richup.io/":
@@ -199,17 +186,6 @@ class Game:
         except:
             self.tts("Não é permitido, sair da prisão neste momento")
 
-    def give_up_game(self):
-        if self.get_url() == "https://richup.io/":
-            self.tts(random_create_room())
-            return
-        try: 
-            self.button.bankrupt.click()
-            time.sleep(1)
-            self.tts("Tem a certeza que quer desistir do jogo?")
-        except:
-            self.tts(random_give_up_not_in_game())
-
     def confirm_give_up_game(self):
         print("confirm")
         try:
@@ -251,6 +227,7 @@ class Game:
         time.sleep(3)
         self.tts("O jogo já não está silenciado")
 
+# Gestos commands
     def help(self):
         try:
             self.button.help.click()
@@ -263,3 +240,29 @@ class Game:
                 self.tts("Não é permitido, aceder à ajuda neste momento")
         except:
             self.tts("Não é permitido, aceder à ajuda neste momento")
+
+
+# GESTOS E VOICE COMMANDS
+    def give_up_game(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+        try: 
+            self.button.bankrupt.click()
+            time.sleep(1)
+            self.tts("Tem a certeza que quer desistir do jogo?")
+        except:
+            self.tts(random_give_up_not_in_game())
+
+    def list_house_information(self,house_name):
+
+        if self.get_url() == "https://richup.io/":
+            self.tts("Precisas de entrar numa sala para acessar ao tabuleiro do jogo")
+            return
+        
+        house = self.house.__getattribute__(house_name)
+        house.click()
+        self.tts(f"Já consegues ver a informação da propriedade {house_name}")
+        time.sleep(5)
+        house.click()
+        self.tts("A informação da propriedade foi minimizada")

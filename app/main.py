@@ -17,7 +17,7 @@ intent_before = ""
 list_intent = ["insert_name", "create_room", "choose_color", "information_house", "start_game", "roll_dice", "end_turn", "buy_house", "leave_prison", "give_up_game", "confirm", "deny", "close_game",
                "list_of_colors", "game_info", "help", "mute", "unmute"]
 
-list_gesture = ["HANDRIGHTUPHELP", "HANDSUPGIVEUP"]
+list_gesture = ["HANDRIGHTUPHELP", "HANDSUPGIVEUP", "SELECTINFOHOUSE"]
 
 GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
             Cada jogador começa com dinheiro e escolhe uma cor para representá-lo no tabuleiro. 
@@ -137,10 +137,14 @@ async def gesture_handler(game: Game, gesture:str):
         game.tts(random_not_understand())
     elif name_of_gesture in list_gesture:
         if name_of_gesture == "HANDRIGHTUPHELP":
-            game.tts("Para obter ajuda, diga ajuda")
             game.help()
         elif name_of_gesture == "HANDSUPGIVEUP":
             game.give_up_game()
+        # REFAZER
+        elif name_of_gesture == "SELECTINFOHOUSE": 
+            random_house = random.choice(list(houses.keys()))
+            game.tts(f"Vou dar informação sobre a propriedade {random_house}")
+            game.list_house_information(houses[random_house])
     else:
         game.tts(random_not_understand_the_gesture())
         print(f"Command not found: {gesture}")
@@ -166,14 +170,12 @@ def process_message(message):
     else:
         json_command = ET.fromstring(message).find(".//command").text
         print(f"Json command: {json_command}")
-        # json_command contains the recognized command
         if "recognized" in json_command:
             gesture = json.loads(json_command)
             return gesture, "gesture"
         elif "nlu" in json_command:
             command = json.loads(json_command)["nlu"]
             command = json.loads(command)
-            print(f"Command received: {command['text']}")
             return command, "voice"
         else:
             return "OK", None

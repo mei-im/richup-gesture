@@ -213,55 +213,99 @@ class Houses(MapObject):
         return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[9]/div[9]/div[3]/div[1]')
 
 class Colors(MapObject):
-    # TODO MUDAR CORES PARTE 2
-    # /html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button
-    # /html/body/div[7]/div/div[1]/div/div/div[1]/div/button[1]
-    # /html/body/div[7]/div/div[1]/div/div/div[1]/div/button[12]
 
     @property
     def lime(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[1]')
+        try: 
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[1]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[1]')
     
     @property
     def yellow(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[2]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[2]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[2]')
     
     @property
     def orange(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[3]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[3]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[3]')
     
     @property
     def red(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[4]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[4]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[4]')
     
     @property
     def blue(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[5]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[5]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[5]')
     
     @property
     def cyan(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[6]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[6]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[6]')
     
     @property
     def water(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[7]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[7]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[7]')
     
     @property
     def green(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[8]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[8]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[8]')
     
     @property
     def brown(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[9]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[9]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[9]')
     
     @property
     def hotpink(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[10]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[10]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[10]')
     
     @property
     def pink(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[11]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[11]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[11]')
     
     @property
     def purple(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[12]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[12]')
+        except Exception:
+            self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
+            return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[12]')
