@@ -8,6 +8,12 @@ from game.mapping import Buttons, Inputs, Houses, Colors
 from dictionaries.colors_dic import colors_in_pt, colors_map_values
 from selenium.webdriver.common.by import By
 
+GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
+            Cada jogador começa com dinheiro e escolhe uma cor para representá-lo no tabuleiro. 
+            O objetivo é adquirir propriedades, construir casas e hotéis, e cobrar aluguer dos adversários.
+            Durante o jogo, os jogadores negociam entre si, podem comprar, vender e trocar propriedades. 
+            O vencedor é o último jogador que não vai à falência. Para ganhar, é essencial tomar decisões financeiras inteligentes, formar alianças e gerir recursos com sabedoria. 
+            Boa sorte!"""
 
 class Game:
     def __init__(self, TTS) -> None:
@@ -68,13 +74,14 @@ class Game:
                 color = self.colors.__getattribute__(color)
                 color.click()
                 self.tts(f"Ficaste com a cor {name_color}")
+                # TODO CRIAR NOVA FORMAR DE CHAMAR O BOTAO
                 time.sleep(3)
                 self.join_game()
             else:
-                self.tts("Não é permitido escolheres a cor, neste momento")
+                self.tts("Não é permitido mudar de cor, neste momento")
                 
         except:
-            self.tts("Não é permitido escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
+            self.tts("Não é permitido mudares ou escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
 
     def roll_dice(self):
         if self.get_url() == "https://richup.io/":
@@ -97,28 +104,6 @@ class Game:
                     self.tts(random_roll_dice_not_auth())
             except:
                 self.tts(random_roll_dice_not_auth())
-    
-    def end_turn(self):
-        if self.get_url() == "https://richup.io/":
-            self.tts(random_create_room())
-            return
-        
-        try: 
-            if self.button.end_turn.text == 'End turn':
-                self.button.end_turn.click()
-                self.tts(random_end_turn())
-            elif self.button.roll_dice.text.lower() == 'start game':
-                self.tts("Precisa de começar o jogo para poder jogar")
-            else:
-                self.tts(random_end_turn_not_auth())
-        except:
-            try:
-                if self.button.join_game_after_color.text.lower() == 'join game':
-                    self.tts("Precisa de entrar na sala para poder jogar")
-                else:
-                    self.tts(random_end_turn_not_auth())
-            except:
-                self.tts(random_end_turn_other_player())
 
     def buy(self):
 
@@ -237,22 +222,6 @@ class Game:
         self.tts("A informação da propriedade foi minimizada")
 
 # Gests commands
-    def help(self):
-        if self.get_url() == "https://richup.io/":
-            self.tts(random_create_room())
-            return
-        try:
-            self.button.help.click()
-            self.tts("A informação do Jogo foi aberta")
-            time.sleep(10)
-            try:
-                self.button.close_help.click()
-                self.tts("A informação do Jogo foi fechada")
-            except:
-                self.tts("Não é permitido, aceder à ajuda neste momento")
-        except:
-            self.tts("Não é permitido, aceder à ajuda neste momento")
-
     def change_color_number(self, number:int, increase:bool):
         if self.get_url() == "https://richup.io/":
             self.tts(random_create_room())
@@ -280,7 +249,6 @@ class Game:
         except:
             self.tts("Não é permitido, mudar de cor neste momento")
 
-
     def get_color_activate(self)->int:
         color_number = 0
         for i in range(1,13):
@@ -293,8 +261,24 @@ class Game:
         return color_number
         
 
-
 # GESTOS E VOICE COMMANDS
+    def help(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+        try:
+            self.button.help.click()
+            self.tts("A informação do Jogo foi aberta")
+            time.sleep(10)
+            self.tts(GAME_INFO)
+            try:
+                self.button.close_help.click()
+                self.tts("A informação do Jogo foi fechada")
+            except:
+                self.tts("Não é permitido, aceder à ajuda neste momento")
+        except:
+            self.tts("Não é permitido, aceder à ajuda neste momento")
+            
     def give_up_game(self):
         if self.get_url() == "https://richup.io/":
             self.tts(random_create_room())
@@ -321,3 +305,25 @@ class Game:
                 self.tts("Não é permitido entrar na sala, neste momento")
         except:
             self.tts("Não é permitido entrar na sala, enquanto não estás numa sala ou num jogo a decorrer")
+
+    def end_turn(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+        
+        try: 
+            if self.button.end_turn.text == 'End turn':
+                self.button.end_turn.click()
+                self.tts(random_end_turn())
+            elif self.button.roll_dice.text.lower() == 'start game':
+                self.tts("Precisa de começar o jogo para poder jogar")
+            else:
+                self.tts(random_end_turn_not_auth())
+        except:
+            try:
+                if self.button.join_game_after_color.text.lower() == 'join game':
+                    self.tts("Precisa de entrar na sala para poder jogar")
+                else:
+                    self.tts(random_end_turn_not_auth())
+            except:
+                self.tts(random_end_turn_other_player())

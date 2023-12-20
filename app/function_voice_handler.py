@@ -11,13 +11,6 @@ from game.game import Game
 from dictionaries.dictionarys import houses,colors
 from lists.intent_list import list_intent
 
-GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
-            Cada jogador começa com dinheiro e escolhe uma cor para representá-lo no tabuleiro. 
-            O objetivo é adquirir propriedades, construir casas e hotéis, e cobrar aluguer dos adversários.
-            Durante o jogo, os jogadores negociam entre si, podem comprar, vender e trocar propriedades. 
-            O vencedor é o último jogador que não vai à falência. Para ganhar, é essencial tomar decisões financeiras inteligentes, formar alianças e gerir recursos com sabedoria. 
-            Boa sorte!"""
-
 intent_before = ""
 
 async def voice_handler(game: Game, message:str):
@@ -107,7 +100,7 @@ async def voice_handler(game: Game, message:str):
             game.tts(f"As cores disponíveis são: {string_colors}")
             intent_before = intent
         elif intent == "game_info": # DONE
-            game.tts(GAME_INFO)
+            game.help()
             intent_before = intent
         elif intent == "mute": # DONE
             game.mute_func()
