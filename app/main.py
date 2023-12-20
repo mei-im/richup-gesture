@@ -3,8 +3,8 @@ from os import system
 import xml.etree.ElementTree as ET
 import ssl
 import websockets
-from app.function_gesture_handler import gesture_handler
-from app.function_voice_handler import voice_handler
+from function_gesture_handler import gesture_handler
+from function_voice_handler import voice_handler
 
 from game import Game
 from tts import TTS

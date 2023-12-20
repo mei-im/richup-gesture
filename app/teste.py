@@ -1,7 +1,6 @@
 import time
 from selenium.webdriver import Firefox
 from selenium.webdriver.common.by import By
-from new_dictonarys import colors_map_values
 
 driver = Firefox()
 driver.get('https://richup.io/')

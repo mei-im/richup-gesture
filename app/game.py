@@ -5,7 +5,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from utils import *
 from mapping import Buttons, Inputs, Houses, Colors
-from new_dictonarys import colors_in_pt, colors_map_values
+from colors_dic import colors_in_pt, colors_map_values
 
 
 class Game:
