@@ -1,6 +1,6 @@
 
-from game import Game
-from gestures_list import list_gesture
+from game.game import Game
+from lists.gestures_list import list_gesture
 
 from utils import *
 

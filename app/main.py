@@ -6,7 +6,7 @@ import websockets
 from function_gesture_handler import gesture_handler
 from function_voice_handler import voice_handler
 
-from game import Game
+from game.game import Game
 from tts import TTS
 
 HOST = "127.0.0.1"

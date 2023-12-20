@@ -7,9 +7,9 @@ import websockets
 from utils import *
 
 
-from game import Game
-from dictionarys import houses,colors
-from intent_list import list_intent
+from game.game import Game
+from dictionaries.dictionarys import houses,colors
+from lists.intent_list import list_intent
 
 GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
             Cada jogador começa com dinheiro e escolhe uma cor para representá-lo no tabuleiro. 
