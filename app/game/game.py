@@ -258,9 +258,7 @@ class Game:
             self.tts(random_create_room())
             return
         try:
-            print(self.button.join_game_after_color.text.lower())
             if self.button.join_game_after_color.text.lower() == 'join game':
-                print("change color")
                 color_number_activate = self.get_color_activate()
                 if color_number_activate != 0:
                     if increase:
@@ -273,7 +271,7 @@ class Game:
                     elif color_number == 13:
                         color_number = 1
 
-                    self.tts(f"Escolheste a cor {colors_map_values[color_number]}" )
+                    self.tts(f"Estas com a cor {colors_in_pt[colors_map_values[color_number]]}")
                     self.colors.__getattribute__(colors_map_values[color_number]).click()
                 else:   
                     self.tts("Não tem nenhuma cor disponível")

@@ -24,6 +24,6 @@ colors_map_values = {
     8: "green",
     9: "brown",
     10: "hotpink",
-    11: "purple",
-    12: "pink"
+    11: "pink",
+    12: "purple",
 }
