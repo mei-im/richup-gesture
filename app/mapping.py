@@ -309,3 +309,26 @@ class Colors(MapObject):
         except Exception:
             self.find_element("/html/body/div[2]/div[4]/div/div[3]/div/div[1]/div/div/div/div[2]/button").click()
             return self.find_element('/html/body/div[7]/div/div[1]/div/div/div[1]/div/button[12]')
+        
+    @property
+    def get_color_activate(self):
+        for i in range(1,13):
+            button = self.find_element(f"/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
+
+            if not button.is_enabled():
+                return i
+    
+
+    @property
+    def change_color_by_number(self, number):
+        color_number = 0 
+        for i in range(1,13):
+            button = self.find_element(f"/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
+
+            if not button.is_enabled():
+                color_number = i 
+                break
+        if color_number == 0:
+            return None
+        color_number = color_number + number
+        return self.find_element(f'/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{color_number}]'), color_number

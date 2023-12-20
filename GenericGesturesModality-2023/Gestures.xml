@@ -12,7 +12,7 @@
   </Gesture>
   <Gesture>
     <ID>2</ID>
-    <NAME>throde_roll_dice</NAME>
-    <SEMANTIC>throderolldice</SEMANTIC>
+    <NAME>select_info_house</NAME>
+    <SEMANTIC>selectinfohouse</SEMANTIC>
   </Gesture>
 </Gestures>

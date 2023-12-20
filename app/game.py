@@ -5,7 +5,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from utils import *
 from mapping import Buttons, Inputs, Houses, Colors
-from new_dictonarys import colors_in_pt
+from new_dictonarys import colors_in_pt, colors_map_values
 
 
 class Game:
@@ -63,11 +63,23 @@ class Game:
         
         try: 
             if self.button.join_game_after_color.text.lower() == 'join game':
-                print("join game")
                 name_color = colors_in_pt[color]
                 color = self.colors.__getattribute__(color)
                 color.click()
                 self.tts(f"Ficaste com a cor {name_color}")
+                self.join_game()
+            else:
+                self.tts("Não é permitido escolheres a cor, neste momento")
+                
+        except:
+            self.tts("Não é permitido escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
+    
+    def join_game(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+        try:
+            if self.button.join_game_after_color.text.lower() == 'join game':
                 time.sleep(3)
                 self.tts("Espera que entre na sala")
                 time.sleep(3)
@@ -75,11 +87,10 @@ class Game:
                 time.sleep(3)
                 self.tts("Bem vindo ao sua sala")
             else:
-                self.tts("Não é permitido escolheres a cor, neste momento")
-                
+                self.tts("Não é permitido entrar na sala, neste momento")
         except:
-            self.tts("Não é permitido escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
-    
+            self.tts("Não é permitido entrar na sala, enquanto não estás numa sala ou num jogo a decorrer")
+
     def roll_dice(self):
         if self.get_url() == "https://richup.io/":
             self.tts(random_create_room())
@@ -240,6 +251,18 @@ class Game:
                 self.tts("Não é permitido, aceder à ajuda neste momento")
         except:
             self.tts("Não é permitido, aceder à ajuda neste momento")
+
+    def change_color_by_number(self, number):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+        try:
+            button, color_number = self.colors.change_color_by_number(number)
+            button.click()
+            self.tts(f"Ficaste com a cor {colors_in_pt[color_number]}")
+        except:
+            self.tts("Não é permitido, mudar de cor neste momento")
+        
 
 
 # GESTOS E VOICE COMMANDS
