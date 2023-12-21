@@ -83,28 +83,6 @@ class Game:
         except:
             self.tts("Não é permitido mudares ou escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
 
-    def roll_dice(self):
-        if self.get_url() == "https://richup.io/":
-            self.tts(random_create_room())
-            return
-        try: 
-            if self.button.roll_dice.text.lower() == 'roll the dice' or \
-                self.button.roll_dice.text.lower() == 'roll again':
-                self.button.roll_dice.click()
-                self.tts(random_roll_dice())
-            elif self.button.roll_dice.text.lower() == 'start game':
-                self.tts("Precisa de começar o jogo para poder jogar")
-            else:
-                self.tts(random_roll_dice_in_turn())
-        except: 
-            try:
-                if self.button.join_game_after_color.text.lower() == 'join game':
-                    self.tts("Precisa de entrar na sala para poder jogar")
-                else:
-                    self.tts(random_roll_dice_not_auth())
-            except:
-                self.tts(random_roll_dice_not_auth())
-
     def buy(self):
 
         if self.get_url() == "https://richup.io/":
@@ -327,3 +305,25 @@ class Game:
                     self.tts(random_end_turn_not_auth())
             except:
                 self.tts(random_end_turn_other_player())
+
+    def roll_dice(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+        try: 
+            if self.button.roll_dice.text.lower() == 'roll the dice' or \
+                self.button.roll_dice.text.lower() == 'roll again':
+                self.button.roll_dice.click()
+                self.tts(random_roll_dice())
+            elif self.button.roll_dice.text.lower() == 'start game':
+                self.tts("Precisa de começar o jogo para poder jogar")
+            else:
+                self.tts(random_roll_dice_in_turn())
+        except: 
+            try:
+                if self.button.join_game_after_color.text.lower() == 'join game':
+                    self.tts("Precisa de entrar na sala para poder jogar")
+                else:
+                    self.tts(random_roll_dice_not_auth())
+            except:
+                self.tts(random_roll_dice_not_auth())
