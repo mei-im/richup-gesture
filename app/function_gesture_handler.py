@@ -3,6 +3,7 @@ from game.game import Game
 from lists.gestures_list import list_gesture
 
 from utils import *
+from selenium.webdriver.common.by import By
 
 
 async def gesture_handler(game: Game, gesture:str):
@@ -17,11 +18,24 @@ async def gesture_handler(game: Game, gesture:str):
         elif name_of_gesture == "HANDSUPGIVEUP":
             game.give_up_game()
         elif name_of_gesture == "HANDSFRONTSELECT":
-            game.join_game()
+            if game.button.join_game.text.lower() == "join game":
+                game.join_game()
+                if game.button.join_game.text.lower() != "join game":
+                    game.house_activate(number=1, increase=True)
+            else:
+                name_house = game.name_house
+                game.list_house_information(name_house)
         elif name_of_gesture == "HANDLEFTSHOULDERLEVELDECREASE":
-            game.change_color_number(number=1, increase=False)
+            if game.button.join_game.text.lower() == "join game":
+                game.change_color_number(number=1, increase=False)
+            else:
+                game.house_activate(number=1, increase=False)
+
         elif name_of_gesture == "HANDRIGHTSHOULDERLEVELINCREASE":
-            game.change_color_number(number=1, increase=True)
+            if game.button.join_game.text.lower() == "join game":
+                game.change_color_number(number=1, increase=True)
+            else:
+                game.house_activate(number=1, increase=True)
         elif name_of_gesture == "HANDSDIFFERENTDIRECTIONSCLOSE":    
             game.end_turn()
         elif name_of_gesture == "HANDONEDIRECTIONROLLDICE":

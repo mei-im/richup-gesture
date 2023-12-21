@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from utils import *
 from game.mapping import Buttons, Inputs, Houses, Colors
 from dictionaries.colors_dic import colors_in_pt, colors_map_values
+from dictionaries.houses_dic import houses_div, houses_number
 from selenium.webdriver.common.by import By
 
 GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
@@ -17,6 +18,7 @@ GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que comb
 
 class Game:
     def __init__(self, TTS) -> None:
+        self.name_house = None
         self.browser = Firefox()
         self.browser.get('https://richup.io/')
         self.browser.maximize_window()
@@ -217,14 +219,8 @@ class Game:
                         color_number = 12
                     elif color_number == 13:
                         color_number = 1
-
-                    self.browser.execute_script("arguments[0].style.border='0px solid red'", self.colors.__getattribute__(colors_map_values[color_number_activate]))
-                    self.browser.implicitly_wait(2)
-                    
                     self.tts(random_frase_color(colors_in_pt[colors_map_values[color_number]]))
-                    self.browser.execute_script("arguments[0].style.border='4px solid red'", self.colors.__getattribute__(colors_map_values[color_number]))
                     self.colors.__getattribute__(colors_map_values[color_number]).click()
-                    self.browser.implicitly_wait(5)
                 else:   
                     self.tts("Não tem nenhuma cor disponível")
             else:
@@ -233,16 +229,39 @@ class Game:
             self.tts("Não é permitido, mudar de cor neste momento")
 
     def get_color_activate(self)->int:
-        color_number = 0
+        color_number = -1
         for i in range(1,13):
             try:
                 button = self.browser.find_element(By.XPATH, f"/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
             except:
                 button = self.browser.find_element(By.XPATH, f"/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
             if not button.is_enabled():
-                self.browser.execute_script("arguments[0].style.border='4px solid red'", button)
                 return i
         return color_number
+
+    def house_activate(self, number:int, increase:bool):
+        current_house = -1
+        for i in range(len(houses_div)):
+            div_element = self.browser.find_element(By.XPATH, houses_div[houses_number[i]])
+            if div_element.get_attribute("style") == "border: 4px solid red;":
+                self.browser.execute_script("arguments[0].style.border='0px solid red'", div_element)
+                current_house = i
+                break
+
+        if increase:
+            current_house += number
+        else:
+            current_house -= number
+        
+        if current_house == -1:
+            current_house = len(houses_div) - 1
+        elif current_house == len(houses_div):
+            current_house = 0
+
+        div_element = self.browser.find_element(By.XPATH, houses_div[houses_number[current_house]])
+        self.browser.execute_script("arguments[0].style.border='4px solid red'", div_element)
+        self.tts(f"A casa {houses_number[current_house]} foi selecionada")
+        self.name_house = houses_number[current_house]
         
 # GESTOS E VOICE COMMANDS
     def help(self):
@@ -284,6 +303,7 @@ class Game:
                 self.button.join_game_after_color.click()
                 time.sleep(3)
                 self.tts("Bem vindo ao sua sala")
+                time.sleep(5)
             else:
                 self.tts("Não é permitido entrar na sala, neste momento")
         except:

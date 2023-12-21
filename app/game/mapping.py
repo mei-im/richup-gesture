@@ -17,7 +17,10 @@ class Buttons(MapObject):
 
     @property
     def join_game(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
+        except Exception:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
 
     @property
     def join_game_after_color(self):
@@ -105,7 +108,10 @@ class Houses(MapObject):
 
     @property
     def salvador(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[1]/div[3]/div[1]')
+        try:
+            return self.find_element("/html/body/div[3]/div[4]/div/div[2]/div/div[2]/div[3]/div[1]/div[3]/div[1]")
+        except Exception:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[1]/div[3]/div[1]')
     
     @property
     def rio(self):
