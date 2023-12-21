@@ -217,9 +217,14 @@ class Game:
                         color_number = 12
                     elif color_number == 13:
                         color_number = 1
+
+                    self.browser.execute_script("arguments[0].style.border='0px solid red'", self.colors.__getattribute__(colors_map_values[color_number_activate]))
+                    self.browser.implicitly_wait(2)
                     
                     self.tts(random_frase_color(colors_in_pt[colors_map_values[color_number]]))
+                    self.browser.execute_script("arguments[0].style.border='4px solid red'", self.colors.__getattribute__(colors_map_values[color_number]))
                     self.colors.__getattribute__(colors_map_values[color_number]).click()
+                    self.browser.implicitly_wait(5)
                 else:   
                     self.tts("Não tem nenhuma cor disponível")
             else:
@@ -235,10 +240,10 @@ class Game:
             except:
                 button = self.browser.find_element(By.XPATH, f"/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[1]/button[{i}]")
             if not button.is_enabled():
+                self.browser.execute_script("arguments[0].style.border='4px solid red'", button)
                 return i
         return color_number
         
-
 # GESTOS E VOICE COMMANDS
     def help(self):
         if self.get_url() == "https://richup.io/":

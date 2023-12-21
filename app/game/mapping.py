@@ -22,9 +22,9 @@ class Buttons(MapObject):
     @property
     def join_game_after_color(self):
         try:
-            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
-        except Exception:
             return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
+        except Exception:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div[1]/div[3]/div[1]/div[2]/button')
     
     @property
     def start_game(self):
