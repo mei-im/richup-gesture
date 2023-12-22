@@ -97,7 +97,10 @@ class Buttons(MapObject):
     
     @property
     def close_help(self):
-        return self.find_element("/html/body/div[5]/div/div/button")        
+        try:
+            return self.find_element("/html/body/div[4]/div/div/button")
+        except Exception:
+            return self.find_element("/html/body/div[5]/div/div/button")        
     
 class Inputs(MapObject):
     @property
@@ -115,23 +118,38 @@ class Houses(MapObject):
     
     @property
     def rio(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[3]/div[3]/div[1]')
+        try:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div/div[3]/div[3]/div[3]/div[1]')
+        except Exception:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[3]/div[3]/div[1]')
     
     @property
     def tlv_airport(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[5]/div[3]/div[1]')
+        try:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div/div[3]/div[5]/div[3]/div[1]')
+        except Exception:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[5]/div[3]/div[1]')
     
     @property
     def tel_aviv(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[6]/div[3]/div[1]')
+        try:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[6]/div[3]/div[1]')
+        except Exception:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div/div[3]/div[6]/div[3]/div[1]')
     
     @property
     def haifa(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[8]/div[3]/div[1]')
+        try:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div/div[3]/div[8]/div[3]/div[1]')
+        except Exception:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[8]/div[3]/div[1]')
     
     @property
     def jerusalem(self):
-        return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[9]/div[3]/div[1]')
+        try:
+            return self.find_element('/html/body/div[3]/div[4]/div/div[2]/div/div/div[3]/div[9]/div[3]/div[1]')
+        except Exception:
+            return self.find_element('/html/body/div[2]/div[4]/div/div[2]/div/div/div[3]/div[9]/div[3]/div[1]')
     
     @property
     def venice(self):

@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from utils import *
 from game.mapping import Buttons, Inputs, Houses, Colors
 from dictionaries.colors_dic import colors_in_pt, colors_map_values
-from dictionaries.houses_dic import houses_div, houses_number
+from dictionaries.houses_dic import houses_number
 from selenium.webdriver.common.by import By
 
 GAME_INFO = """O RichUp é a adaptação do clássico jogo de tabuleiro que combina estratégia e negociação. 
@@ -218,8 +218,8 @@ class Game:
 
     def house_activate(self, number:int, increase:bool):
         current_house = -1
-        for i in range(len(houses_div)):
-            div_element = self.browser.find_element(By.XPATH, houses_div[houses_number[i]])
+        for i in range(len(houses_number)):
+            div_element = self.house.__getattribute__(houses_number[i])
             if div_element.get_attribute("style") == "border: 4px solid red;":
                 self.browser.execute_script("arguments[0].style.border='0px solid red'", div_element)
                 current_house = i
@@ -231,11 +231,11 @@ class Game:
             current_house -= number
         
         if current_house == -1:
-            current_house = len(houses_div) - 1
-        elif current_house == len(houses_div):
+            current_house = len(houses_number) - 1
+        elif current_house == len(houses_number):
             current_house = 0
 
-        div_element = self.browser.find_element(By.XPATH, houses_div[houses_number[current_house]])
+        div_element = self.house.__getattribute__(houses_number[current_house])
         self.browser.execute_script("arguments[0].style.border='4px solid red'", div_element)
         self.tts(f"A casa {houses_number[current_house]} foi selecionada")
         self.name_house = houses_number[current_house]
@@ -248,8 +248,9 @@ class Game:
         try:
             self.button.help.click()
             self.tts("A informação do Jogo foi aberta")
-            time.sleep(10)
+            time.sleep(3)
             self.tts(GAME_INFO)
+            time.sleep(30)
             try:
                 self.button.close_help.click()
                 self.tts("A informação do Jogo foi fechada")
