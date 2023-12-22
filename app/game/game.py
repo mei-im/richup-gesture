@@ -85,29 +85,6 @@ class Game:
         except:
             self.tts("Não é permitido mudares ou escolheres a cor, enquanto não estás numa sala ou num jogo a decorrer")
 
-    def buy(self):
-
-        if self.get_url() == "https://richup.io/":
-            self.tts(random_create_room())
-            return
-
-        try:
-            if "Buy" in self.button.buy.text:
-                self.button.buy.click()
-                self.tts(random_buy_house())
-            else:
-                self.tts(random_buy_house_not_auth())
-        except:
-            try:
-                if self.button.roll_dice.text.lower() == 'roll the dice' or \
-                    self.button.roll_dice.text.lower() == 'roll again' or \
-                    self.button.roll_dice.text.lower() == 'end turn':
-                    self.tts(random_buy_house_not_auth())
-                else:
-                    self.tts(random_buy_house_not_in_game())
-            except:
-                self.tts(random_buy_house_not_in_game())
-
     def start_game(self):
 
         if self.get_url() == "https://richup.io/":
@@ -352,3 +329,25 @@ class Game:
                     self.tts(random_roll_dice_not_auth())
             except:
                 self.tts(random_roll_dice_not_auth())
+
+    def buy(self):
+        if self.get_url() == "https://richup.io/":
+            self.tts(random_create_room())
+            return
+
+        try:
+            if "Buy" in self.button.buy.text:
+                self.button.buy.click()
+                self.tts(random_buy_house())
+            else:
+                self.tts(random_buy_house_not_auth())
+        except:
+            try:
+                if self.button.roll_dice.text.lower() == 'roll the dice' or \
+                    self.button.roll_dice.text.lower() == 'roll again' or \
+                    self.button.roll_dice.text.lower() == 'end turn':
+                    self.tts(random_buy_house_not_auth())
+                else:
+                    self.tts(random_buy_house_not_in_game())
+            except:
+                self.tts(random_buy_house_not_in_game())

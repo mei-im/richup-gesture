@@ -40,6 +40,8 @@ async def gesture_handler(game: Game, gesture:str):
             game.end_turn()
         elif name_of_gesture == "HANDONEDIRECTIONROLLDICE":
             game.roll_dice()
+        elif name_of_gesture == "HANDSJOIN":
+            game.buy()
     else:
         game.tts(random_not_understand_the_gesture())
         print(f"Command not found: {gesture}")
